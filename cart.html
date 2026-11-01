@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Luxury Perfume</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="kj_logo.icon.webp">
+    
+    <!-- استدعاء ملف الجافاسكريبت المشترك -->
+    <script src="javascript.js" defer></script>
+    
+    <!-- مكتبة PayPal SDK -->
+   <script src="https://www.paypal.com/sdk/js?client-id=BAAZzQ4stZ4lrxuf7fJ58FOTylfxgbrMMf9sgNcnOiergAbZA7KG1yvGJkOD_7ngAWefjRUljGGeGoQ1zI&currency=ILS"></script>
+    <style>
+        .cart-box {
+            max-width: 650px;
+            margin: 40px auto;
+            background: transparent;
+            border: 2px solid var(--color-gray-mid);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--color-black);
+            font-size: 1.05rem;
+        }
+
+        .cart-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .item-name {
+            font-weight: 600;
+        }
+
+        .item-price-detail {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-total-price {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .btn-remove {
+            background: #ff4d4d;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-remove:hover {
+            opacity: 0.85;
+        }
+
+        .cart-summary-section {
+            margin-top: 25px;
+            border-top: 2px solid var(--color-gray-mid);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .cart-total-text {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--color-black);
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cart {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-empty {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .btn-empty:hover {
+            background: #e03e3e;
+        }
+
+        .empty-msg {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin: 20px 0;
+        }
+
+        .cart-badge {
+            background-color: var(--color-black);
+            color: var(--color-white);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            vertical-align: middle;
+            margin-left: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Luxury Perfume</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Perfumes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="cart.html">Cart <span id="cartCount" class="cart-badge">0</span></a>
+            <a href="menu.html">Menu</a>
+        </nav>
+    </header>
+
+    <div class="container fade-in">
+        <div class="cart-box">
+            <h2 style="text-align: center; margin-bottom: 25px; color: var(--color-black);">Your shopping cart</h2>
+
+            <div id="cartItemsContainer"></div>
+
+            <div class="cart-summary-section">
+                <h3 class="cart-total-text">Total to pay: <span id="cartTotal">₪0</span></h3>
+                <div class="cart-actions">
+                    <button class="btn-cart btn-empty" onclick="clearCart()">Empty cart</button>
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Luxury Perfume. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">
+            <a href="privacy.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Privacy Policy</a> |
+            <a href="returns.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Shipping & Returns</a>
+        </p>
+    </footer>
+
+    <script>
+        // عرض وتحديث محتويات السلة داخل الصفحة
+        function loadCartDisplay() {
+            const cart = getCart();
+            const container = document.getElementById('cartItemsContainer');
+            const totalEl = document.getElementById('cartTotal');
+            const paypalContainer = document.getElementById('paypal-button-container');
+
+            if (!container || !totalEl) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="empty-msg">Your shopping cart is empty.</p>';
+                totalEl.textContent = '₪0';
+                if (paypalContainer) paypalContainer.style.display = 'none';
+                return;
+            }
+
+            if (paypalContainer) paypalContainer.style.display = 'block';
+
+            let total = 0;
+            let html = '';
+
+            cart.forEach((item, index) => {
+                const qty = item.quantity || 1;
+                const subtotal = Number(item.price) * qty;
+                total += subtotal;
+
+                html += `
+                    <div class="cart-item-row">
+                        <div class="cart-item-info">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-price-detail">₪${item.price} × ${qty}</span>
+                        </div>
+                        <div class="cart-item-actions">
+                            <span class="item-total-price">₪${subtotal}</span>
+                            <button class="btn-remove" onclick="removeItem(${index})">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            totalEl.textContent = '₪' + total;
+        }
+
+        // تهيئة زر PayPal
+        function initPayPalButton() {
+            const paypalContainer = document.getElementById('paypal-button-container');
+            if (!window.paypal || !paypalContainer) return;
+
+            paypalContainer.innerHTML = '';
+
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    height: 45
+                },
+                createOrder: (data, actions) => {
+                    const total = calculateTotal();
+                    if (total <= 0) {
+                        alert("Your cart is empty!");
+                        return;
+                    }
+
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                currency_code: 'ILS',
+                                value: total.toString()
+                            },
+                            description: "Luxury Perfume Purchase"
+                        }]
+                    });
+                },
+                onApprove: (data, actions) => {
+                    return actions.order.capture().then((details) => {
+                        alert(`Thank you, ${details.payer.name.given_name}! Your payment was successful.`);
+                        localStorage.removeItem('perfumeCart');
+                        window.location.href = "index.html";
+                    });
+                },
+                onError: (err) => {
+                    console.error("PayPal Error:", err);
+                    alert("An error occurred during the PayPal checkout process.");
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // تشغيل التهيئة فور اكتمال تحميل عناصر الصفحة
+        window.addEventListener('DOMContentLoaded', () => {
+            loadCartDisplay();
+            initPayPalButton();
+        });
+    </script>
+</body>
+
+</html>

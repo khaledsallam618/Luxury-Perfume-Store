@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumes - Luxury Perfume</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="javascript.js"></script>
+    <link rel="icon" href="kj_logo.icon.webp">
+
+    <style>
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            /* بما أن الموقع بالعبرية ومتناسق RTL، وضعته باليمين ويمكنك تغييره لـ left إن أردت */
+            width: 50px;
+            height: 50px;
+
+            /* تحويل الخلفية إلى زجاجية ضبابية متناسقة مع الكود الأول */
+            background: transparent;
+            border: 2px solid var(--color-gray-mid);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            /* لون السهم الداكن ليتماشى مع نصوص الموقع والخلفية الفاتحة */
+            color: var(--color-black);
+
+            /* تعديل الانحناء ليصبح متناسقاً مع أزرار الكود الأول بدلاً من الدائرة الكاملة */
+            border-radius: var(--radius-sm);
+
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            /* استخدام نفس نظام ظلال الموقع الموحد */
+            z-index: 1000;
+
+            transition: var(--transition-base);
+            /* توحيد سرعة الحركة الـ 0.5s */
+        }
+
+        /* تأثير عند تحريك الماوس فوق الزر (يتحول للهوية الكحلية والذهبية الفاخرة) */
+        .scroll-to-top:hover {
+            background: var(--color-black);
+            color: var(--color-bg);
+            /* السهم يتحول للذهبي */
+            border-color: var(--color-black);
+            transform: translateY(-4px) scale(1.05);
+            /* حركة صعود خفيفة تشبه الهوفير للبطاقات */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Luxury Perfume</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Perfumes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="cart.html">Cart <span id="cartCount" class="cart-badge">0</span></a>
+            <a href="menu.html">Menu</a>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="perfumeSearch" placeholder="Search..." onkeyup="filterPerfumes()">
+    </div>
+
+
+
+    <div class="container grid fade-in">
+        <div class="card">
+            <img src="OUDROYAL.png" alt="OUD ROYAL PERFUME"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>Oud Royal</h3>
+            <p>₪850</p>
+            <button onclick="addToCart('Oud Royal',850)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="AMBERNIOR.avif" alt="Ambre Noir"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>Amber Noir</h3>
+            <p>₪690</p>
+            <button onclick="addToCart('Amber Noir',690)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img class="product-img" src="ONEMILLION.webp" alt="One Million Perfume"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>One Million</h3>
+            <p>₪400</p>
+            <button onclick="addToCart('One Million',400)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="DIORSAUVAGE.webp" alt="SAUVAGE PERFUME"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>SAUVAGE</h3>
+            <p>₪980</p>
+            <button onclick="addToCart('SAUVAGE',980)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="JEANPAULGAULTIER.webp" alt="JEAN PAUL GAULTIER PERFUME"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>JEAN PAUL GAULTIER</h3>
+            <p>₪400</p>
+            <button onclick="addToCart('JEAN PAUL GAULTIER',400)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="YVESSAINTLAURENT.webp" alt="YVES SAINT LAURENT PERFUME"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>YVES SAINT LAURENT</h3>
+            <p>₪448</p>
+            <button onclick="addToCart('YVES SAINT LAURENT',448)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="GIORGIOARMANIPERFUME.webp" alt="GIORGIO ARMANI"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>Giorgio Armani Si Passione</h3>
+            <p>₪579</p>
+            <button onclick="addToCart('GIORGIO ARMANI',579)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="COCOCHANELPARIS.webp" alt="Coco Chanel"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>COCO CHANEL PARIS</h3>
+            <p>₪1085</p>
+            <button onclick="addToCart('COCO CHANEL PARIS',1085)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="VALENTINO.webp" alt="VALENTINO"
+                style="width: 60%; height: 60%; object-fit: cover; border-radius: 8px;">
+            <h3>VALENTINO</h3>
+            <p>₪534</p>
+            <button onclick="addToCart('VALENTINO',534)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="GENTLEMENPERFUME.avif" alt="GENTLEMEN"
+                style="width: 70%; height: 60%; object-fit: cover; border-radius: 8px;">
+            <h3>GENTLEMEN</h3>
+            <p>₪535</p>
+            <button onclick="addToCart('GENTLEMEN',535)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="THOSMASKOSMALAAPRES.png" alt="THOMAS KOSMALA APRES LAMOUR ORIGINAL"
+                style="width: 200px; height: 175px; object-fit: cover; border-radius: 8px;">
+            <h3>THOMAS KOSMALA APRES L'AMOUR ORIGINAL</h3>
+            <p>₪1210</p>
+            <button onclick="addToCart('THOMAS KOSMALA APRES LAMOUR ORIGINAL',1210)">Add to cart</button>
+        </div>
+        <!-- عطور إضافية مقترحة -->
+
+        <div class="card">
+            <img src="BLEUDECHANEL.webp" alt="BLEU DE CHANEL"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>BLEU DE CHANEL</h3>
+            <p>₪815</p>
+            <button onclick="addToCart('BLEU DE CHANEL', 815)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="CREEDAVENTUS.png" alt="CREED AVENTUS"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>CREED AVENTUS</h3>
+            <p>₪1350</p>
+            <button onclick="addToCart('CREED AVENTUS', 1350)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="BACCARATROUGE540.webp" alt="BACCARAT ROUGE 540"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>BACCARAT ROUGE 540</h3>
+            <p>₪1250</p>
+            <button onclick="addToCart('BACCARAT ROUGE 540', 1250)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="TOMFORD.webp" alt="TOM FORD OMBRÉ LEATHER"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>TOM FORD OMBRÉ LEATHER</h3>
+            <p>₪740</p>
+            <button onclick="addToCart('TOM FORD OMBRÉ LEATHER', 740)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="DIORHOMMEINTENSE.webp" alt="DIOR HOMME INTENSE"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>DIOR HOMME INTENSE</h3>
+            <p>₪684</p>
+            <button onclick="addToCart('DIOR HOMME INTENSE', 684)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="VERSACEEROS.webp" alt="VERSACE EROS"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>VERSACE EROS</h3>
+            <p>₪360</p>
+            <button onclick="addToCart('VERSACE EROS', 360)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="PARFUMSDEMARLYLAYTON.webp" alt="PARFUMS DE MARLY LAYTON"
+                style="width: 200px; height: 190px; object-fit: cover; border-radius: 8px;">
+            <h3>PARFUMS DE MARLY LAYTON</h3>
+            <p>₪940</p>
+            <button onclick="addToCart('PARFUMS DE MARLY LAYTON', 940)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="KILIAN.webp" alt="KILIAN ANGELS SHARE"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>KILIAN ANGELS' SHARE</h3>
+            <p>₪890</p>
+            <button onclick="addToCart('KILIAN ANGELS SHARE', 890)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="XERJOFFERBAPURA.webp" alt="XERJOFF ERBA PURA"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>XERJOFF ERBA PURA</h3>
+            <p>₪790</p>
+            <button onclick="addToCart('XERJOFF ERBA PURA', 790)">Add to cart</button>
+        </div>
+        <!-- عطور فاخرة إضافية -->
+        <div class="card">
+            <img src="CHANELALLUREHOMMESPORT.webp" alt="CHANEL ALLURE HOMME SPORT"
+                style="width: 200px; height: 175px; object-fit: cover; border-radius: 8px;">
+            <h3>CHANEL ALLURE HOMME SPORT</h3>
+            <p>₪620</p>
+            <button onclick="addToCart('CHANEL ALLURE HOMME SPORT', 620)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="ROJAPARFUMSELYSIUM.webp" alt="ROJA PARFUMS ELYSIUM"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>ROJA PARFUMS ELYSIUM</h3>
+            <p>₪1150</p>
+            <button onclick="addToCart('ROJA PARFUMS ELYSIUM', 1150)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="LELABOSANTAL33.png" alt="LE LABO SANTAL 33"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>LE LABO SANTAL 33</h3>
+            <p>₪990</p>
+            <button onclick="addToCart('LE LABO SANTAL 33', 990)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="INITIOOUDFORGREATNESS.png" alt="INITIO OUD FOR GREATNESS"
+                style="width: 200px; height: 175px; object-fit: cover; border-radius: 8px;">
+            <h3>INITIO OUD FOR GREATNESS</h3>
+            <p>₪1280</p>
+            <button onclick="addToCart('INITIO OUD FOR GREATNESS', 1280)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="NISHANEHACIVAT.webp" alt="NISHANE HACIVAT"
+                style="width: 200px; height: 230px; object-fit: cover; border-radius: 8px;">
+            <h3>NISHANE HACIVAT</h3>
+            <p>₪860</p>
+            <button onclick="addToCart('NISHANE HACIVAT', 860)">Add to cart</button>
+        </div>
+        <!-- عطور فاخرة إضافية جديدة -->
+        <div class="card">
+            <img src="AMOUAGEINTERLUDEMAN.webp" alt="AMOUAGE INTERLUDE MAN"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>AMOUAGE INTERLUDE MAN</h3>
+            <p>₪1180</p>
+            <button onclick="addToCart('AMOUAGE INTERLUDE MAN', 1180)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="MAISONMARGIELAREPLICAJAZZCLUB.png" alt="REPLICA JAZZ CLUB"
+                style="width: 200px; height: 230px; object-fit: cover; border-radius: 8px;">
+            <h3>REPLICA JAZZ CLUB</h3>
+            <p>₪540</p>
+            <button onclick="addToCart('REPLICA JAZZ CLUB', 540)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="TOMFORDTOBACCOVANILLE.webp" alt="TOM FORD TOBACCO VANILLE"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>TOM FORD TOBACCO VANILLE</h3>
+            <p>₪1120</p>
+            <button onclick="addToCart('TOM FORD TOBACCO VANILLE', 1120)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="CREEDSILVERMOUNTAINWATER.webp" alt="CREED SILVER MOUNTAIN WATER"
+                style="width: 200px; height: 200px; object-fit: cover; border-radius: 8px;">
+            <h3>CREED SILVER MOUNTAIN WATER</h3>
+            <p>₪1524</p>
+            <button onclick="addToCart('CREED SILVER MOUNTAIN WATER', 1524)">Add to cart</button>
+        </div>
+
+        <div class="card">
+            <img src="BYREDOGYPSYWATER.webp" alt="BYREDO GYPSY WATER"
+                style="width: 200px; height: 230px; object-fit: cover; border-radius: 8px;">
+            <h3>BYREDO GYPSY WATER</h3>
+            <p>₪900</p>
+            <button onclick="addToCart('BYREDO GYPSY WATER', 900)">Add to cart</button>
+        </div>
+    </div>
+
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+    <footer>
+        <p>© 2026 Luxury Perfume. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">
+            <a href="privacy.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Privacy Policy</a> |
+            <a href="returns.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Shipping &
+                Returns</a>
+        </p>
+    </footer>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' /* لجعل حركة الصعود ناعمة وسلسة */
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // العثور تلقائياً على حقل البحث أياً كان الـ id أو الـ class الخاص به
+            const searchInput = document.querySelector('input[type="search"], input[type="text"], #searchInput, .search-bar, .search-input');
+
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', function () {
+                const query = this.value.toLowerCase().trim();
+
+                // العثور على جميع عناصر/بطاقات المنتجات داخل الصفحة
+                const products = document.querySelectorAll('.perfume-card, .product-card, .card, .item');
+
+                products.forEach(product => {
+                    // قراءة كامل النص الموجود داخل بطاقة المنتج (الاسم، الوصف، البراند)
+                    const productText = product.textContent.toLowerCase();
+
+                    if (productText.includes(query)) {
+                        product.style.display = ""; // إظهار المنتج
+                    } else {
+                        product.style.display = "none"; // إخفاء المنتج غير المطابق
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

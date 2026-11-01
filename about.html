@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Learn about Luxury Perfume, our passion for authentic world-class scents, and our commitment to premium customer experience.">
+    <meta property="og:title" content="About Us - Luxury Perfume">
+    <meta property="og:description" content="The story, craftsmanship, and philosophy behind Luxury Perfume.">
+    <meta property="og:image" content="COCOCHANELPARIS.webp">
+    <title>About Us - Luxury Perfume</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="kj_logo.icon.webp">
+    <script src="javascript.js"></script>
+    <style>
+        /* Hero Section */
+        .about-hero {
+            text-align: center;
+            padding: 70px 20px 30px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .about-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--color-black);
+            letter-spacing: 0.5px;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            color: #444;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Story Section (Glass Box) */
+        .story-section {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 35px 30px;
+            text-align: center;
+            background: transparent;
+            border: 2px solid var(--color-gray-mid);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+            line-height: 1.9;
+            font-size: 1.1rem;
+            color: var(--color-black);
+        }
+
+        .story-section h2 {
+            margin-bottom: 18px;
+            font-size: 1.8rem;
+            color: var(--color-black);
+        }
+
+        /* Features Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 40px auto 70px;
+            padding: 0 20px;
+        }
+
+        .about-card {
+            background: transparent;
+            border: 2px solid var(--color-gray-mid);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-base);
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-card .icon {
+            font-size: 2.3rem;
+            margin-bottom: 15px;
+        }
+
+        .about-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--color-black);
+        }
+
+        .about-card p {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        /* Cart Badge in Nav */
+        .cart-badge {
+            background-color: var(--color-black);
+            color: var(--color-white);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            vertical-align: middle;
+            margin-left: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Luxury Perfume</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Perfumes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="cart.html">Cart <span id="cartCount" class="cart-badge">0</span></a>
+            <a href="menu.html">Menu</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero fade-in">
+            <h1>The Story of Luxury Perfume</h1>
+            <p>A seamless blend of elegance, sophistication, and unforgettable scents</p>
+        </section>
+
+        <!-- Story & Mission Section -->
+        <section class="story-section fade-in">
+            <h2 style="margin-bottom: 15px; color: #111;">Who We Are</h2>
+            <p>
+                At <strong>Luxury Perfume</strong>, we believe fragrance is more than just a scent—it is a signature, a
+                lasting memory, and an expression of personal style.
+                Founded out of a genuine passion for fine perfumery, our goal is to bring the world's most luxurious and
+                coveted scents directly to you.
+                Every bottle in our collection is carefully selected to guarantee unmatched quality, exceptional
+                longevity, and a premium shopping experience from start to finish.
+            </p>
+        </section>
+
+        <!-- Feature Cards Section -->
+        <section class="about-grid fade-in">
+            <div class="about-card">
+                <div class="icon">✨</div>
+                <h3>100% Authentic Quality</h3>
+                <p>We guarantee genuine, original fragrances sourced directly from world-renowned brands.</p>
+            </div>
+
+            <div class="about-card">
+                <div class="icon">🚀</div>
+                <h3>Fast Doorstep Delivery</h3>
+                <p>Quick and reliable shipping service delivering your favorite scent straight to your door.</p>
+            </div>
+
+            <div class="about-card">
+                <div class="icon">💎</div>
+                <h3>Curated Collection</h3>
+                <p>An evolving lineup of exclusive niche fragrances and timeless international classics.</p>
+            </div>
+
+            <div class="about-card">
+                <div class="icon">🔒</div>
+                <h3>Secure Checkout</h3>
+                <p>A safe, seamless, and protected payment process for your complete peace of mind.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Luxury Perfume. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">
+            <a href="privacy.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Privacy Policy</a> |
+            <a href="returns.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Shipping &
+                Returns</a>
+        </p>
+    </footer>
+
+</body>
+
+</html>

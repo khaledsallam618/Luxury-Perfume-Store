@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Luxury Perfume</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="kj_logo.icon.webp">
+    <script src="javascript.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Luxury Perfume</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Perfumes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="cart.html">Cart <span id="cartCount" class="cart-badge">0</span></a>
+            <a href="menu.html">Menu</a>
+        </nav>
+    </header>
+    
+    <div id="table-container"></div>
+    
+    <script>
+        window.addEventListener('load', () => {
+
+            // =========================================================================
+            // ---- 1) فئة الأب: عطر عام (Perfume) ----
+            // =========================================================================
+            class Perfume {
+                constructor(name, price, stock, brand, volume) {
+                    this.name = name;
+                    this.price = price;
+                    this.stock = stock;
+                    this.brand = brand;
+                    this.volume = volume;
+                }
+
+                getDescription() {
+                    return `${this.brand} ${this.name} (${this.volume}ml)`;
+                }
+
+                getTotalStockValue() {
+                    return this.price * this.stock;
+                }
+            }
+
+            // =========================================================================
+            // ---- 2) عطور العود الشرقية (OudPerfume) ----
+            // =========================================================================
+            class OudPerfume extends Perfume {
+                constructor(name, price, stock, brand, volume, oudConcentration, intensity) {
+                    super(name, price, stock, brand, volume);
+                    this.oudConcentration = oudConcentration;
+                    this.intensity = intensity;
+                }
+
+                getPremiumLabel() {
+                    if (this.intensity >= 8 && this.price > 600) return "👑 Royal Oud";
+                    return "✨ Classic Oud";
+                }
+
+                applyDiscount(percentage) {
+                    this.price = this.price - (this.price * (percentage / 100));
+                    return `New Price: ₪${this.price}`;
+                }
+            }
+
+            // =========================================================================
+            // ---- 3) العطور الرياضية والمنعشة (SportPerfume) ----
+            // =========================================================================
+            class SportPerfume extends Perfume {
+                constructor(name, price, stock, brand, volume, season, freshnessLevel) {
+                    super(name, price, stock, brand, volume);
+                    this.season = season;
+                    this.freshnessLevel = freshnessLevel;
+                }
+
+                getBestUsageTime() {
+                    return this.season === "Summer" ? "☀️ Day Time Sport" : "🌙 Evening Casual";
+                }
+
+                restock(amount) {
+                    this.stock += amount;
+                    return `Stock updated to ${this.stock}`;
+                }
+            }
+
+            // =========================================================================
+            // ---- 4) العطور الفاخرة المحدودة (LuxuryPerfume) ----
+            // =========================================================================
+            class LuxuryPerfume extends Perfume {
+                constructor(name, price, stock, brand, volume, serialNumber, goldPlated) {
+                    super(name, price, stock, brand, volume);
+                    this.serialNumber = serialNumber;
+                    this.goldPlated = goldPlated;
+                }
+
+                getExclusivityStatus() {
+                    return this.goldPlated ? "💎 Ultra Limited Edition" : "⭐ Collector Edition";
+                }
+
+                verifySerial() {
+                    let sum = 0;
+                    for (let i = 0; i < this.serialNumber.length; i++) {
+                        sum += parseInt(this.serialNumber[i]) || 0;
+                    }
+                    return sum % 2 === 0 ? "✅ Verified Authentic" : "⚠️ Check Serial";
+                }
+            }
+
+            // =========================================================================
+            // ---- 5) إنشاء كائنات لجميع عطور المتجر (30 عطر) ----
+            // =========================================================================
+            // عطور العود (7 عطور)
+            const oud1 = new OudPerfume("Oud Royal", 850, 15, "Creed", 100, "20%", 9);
+            const oud2 = new OudPerfume("Amber Noir", 690, 8, "Tom Ford", 50, "10%", 7);
+            const oud3 = new OudPerfume("THOMAS KOSMALA APRES L'AMOUR ORIGINAL", 1210, 4, "Thomas Kosmala", 100, "25%", 10);
+            const oud4 = new OudPerfume("TOM FORD OMBRÉ LEATHER", 740, 10, "Tom Ford", 100, "18%", 8);
+            const oud5 = new OudPerfume("INITIO OUD FOR GREATNESS", 1280, 5, "Initio", 90, "25%", 10);
+            const oud6 = new OudPerfume("KILIAN ANGELS' SHARE", 890, 7, "Kilian", 50, "15%", 8);
+            const oud7 = new OudPerfume("AMOUAGE INTERLUDE MAN", 1180, 6, "Amouage", 100, "25%", 10);
+
+            // العطور الرياضية والمنعشة (9 عطور)
+            const sport1 = new SportPerfume("SAUVAGE", 980, 22, "Dior", 100, "Summer", 9);
+            const sport2 = new SportPerfume("One Million", 400, 0, "Paco Rabanne", 100, "Winter", 6);
+            const sport3 = new SportPerfume("JEAN PAUL GAULTIER", 400, 14, "Jean Paul Gaultier", 125, "Summer", 8);
+            const sport4 = new SportPerfume("YVES SAINT LAURENT", 448, 19, "YSL", 100, "Spring", 7);
+            const sport5 = new SportPerfume("BLEU DE CHANEL", 815, 16, "Chanel", 100, "Summer", 9);
+            const sport6 = new SportPerfume("VERSACE EROS", 360, 25, "Versace", 100, "Summer", 8);
+            const sport7 = new SportPerfume("CHANEL ALLURE HOMME SPORT", 620, 12, "Chanel", 100, "Summer", 9);
+            const sport8 = new SportPerfume("NISHANE HACIVAT", 860, 9, "Nishane", 100, "Spring", 8);
+            const sport9 = new SportPerfume("CREED SILVER MOUNTAIN WATER", 1524, 8, "Creed", 100, "Summer", 9);
+
+            // العطور الفاخرة (14 عطر)
+            const luxury1 = new LuxuryPerfume("COCO CHANEL PARIS", 1085, 3, "Chanel", 100, "9921", true);
+            const luxury2 = new LuxuryPerfume("VALENTINO", 534, 7, "Valentino", 50, "4402", false);
+            const luxury3 = new LuxuryPerfume("GIORGIO ARMANI", 579, 11, "Giorgio Armani", 100, "1150", false);
+            const luxury4 = new LuxuryPerfume("GENTLEMEN", 535, 0, "Givenchy", 100, "8832", true);
+            const luxury5 = new LuxuryPerfume("CREED AVENTUS", 1350, 6, "Creed", 100, "7731", true);
+            const luxury6 = new LuxuryPerfume("BACCARAT ROUGE 540", 1250, 5, "Maison Francis Kurkdjian", 70, "5542", true);
+            const luxury7 = new LuxuryPerfume("DIOR HOMME INTENSE", 684, 14, "Dior", 100, "3321", false);
+            const luxury8 = new LuxuryPerfume("PARFUMS DE MARLY LAYTON", 940, 8, "Parfums de Marly", 125, "6612", true);
+            const luxury9 = new LuxuryPerfume("XERJOFF ERBA PURA", 790, 10, "Xerjoff", 100, "4820", false);
+            const luxury10 = new LuxuryPerfume("ROJA PARFUMS ELYSIUM", 1150, 4, "Roja Parfums", 100, "9102", true);
+            const luxury11 = new LuxuryPerfume("LE LABO SANTAL 33", 990, 8, "Le Labo", 100, "3301", false);
+            const luxury12 = new LuxuryPerfume("REPLICA JAZZ CLUB", 540, 10, "Maison Margiela", 100, "5214", false);
+            const luxury13 = new LuxuryPerfume("TOM FORD TOBACCO VANILLE", 1120, 5, "Tom Ford", 100, "7841", true);
+            const luxury14 = new LuxuryPerfume("BYREDO GYPSY WATER", 900, 7, "Byredo", 100, "6320", false);
+
+            // =========================================================================
+            // ---- 6) طباعة البيانات في جدول (HTML Rendering) ----
+            // =========================================================================
+            const container = document.getElementById('table-container');
+
+            if (container) {
+                const allPerfumes = [
+                    { obj: oud1, type: "Oud" }, { obj: oud2, type: "Oud" },
+                    { obj: oud3, type: "Oud" }, { obj: oud4, type: "Oud" },
+                    { obj: oud5, type: "Oud" }, { obj: oud6, type: "Oud" },
+                    { obj: oud7, type: "Oud" },
+                    { obj: sport1, type: "Sport" }, { obj: sport2, type: "Sport" },
+                    { obj: sport3, type: "Sport" }, { obj: sport4, type: "Sport" },
+                    { obj: sport5, type: "Sport" }, { obj: sport6, type: "Sport" },
+                    { obj: sport7, type: "Sport" }, { obj: sport8, type: "Sport" },
+                    { obj: sport9, type: "Sport" },
+                    { obj: luxury1, type: "Luxury" }, { obj: luxury2, type: "Luxury" },
+                    { obj: luxury3, type: "Luxury" }, { obj: luxury4, type: "Luxury" },
+                    { obj: luxury5, type: "Luxury" }, { obj: luxury6, type: "Luxury" },
+                    { obj: luxury7, type: "Luxury" }, { obj: luxury8, type: "Luxury" },
+                    { obj: luxury9, type: "Luxury" }, { obj: luxury10, type: "Luxury" },
+                    { obj: luxury11, type: "Luxury" }, { obj: luxury12, type: "Luxury" },
+                    { obj: luxury13, type: "Luxury" }, { obj: luxury14, type: "Luxury" }
+                ];
+
+                const tableRows = allPerfumes.map((item, index) => {
+                    const p = item.obj;
+                    const isAvailable = p.stock > 0;
+                    let uniqueInfo = "";
+
+                    if (item.type === "Oud") uniqueInfo = p.getPremiumLabel();
+                    if (item.type === "Sport") uniqueInfo = p.getBestUsageTime();
+                    if (item.type === "Luxury") uniqueInfo = p.getExclusivityStatus();
+
+                    return `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><strong>${p.name}</strong> <br><small style="color:#777">${p.getDescription()}</small></td>
+                        <td>₪${p.price}</td>
+                        <td style="color: ${isAvailable ? 'green' : 'red'}; font-weight: bold;">
+                            ${isAvailable ? p.stock : 'אזל מהמלאי'}
+                        </td>
+                        <td>${item.type}</td>
+                        <td><span style="color: blue">${uniqueInfo}</span></td>
+                        <td>₪${p.getTotalStockValue()}</td>
+                    </tr>
+                `;
+                }).join('');
+
+                container.innerHTML = `
+                <table border="1" style="width:100%; border-collapse: collapse; margin-top: 20px; text-align: center; font-family: Arial, sans-serif;">
+                    <thead>
+                        <tr style="background-color: #f2f2f2; height: 40px;">
+                            <th>#</th>
+                            <th>Perfume Details</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Category</th>
+                            <th>Unique Feature (OOP Method)</th>
+                            <th>Total Inventory Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tableRows}
+                    </tbody>
+                </table>
+            `;
+            }
+        });
+    </script>
+
+    <footer>
+        <p>© 2026 Luxury Perfume. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">
+            <a href="privacy.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Privacy Policy</a> |
+            <a href="returns.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Shipping &
+                Returns</a>
+        </p>
+    </footer>
+</body>
+
+</html>

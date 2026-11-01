@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Luxury Perfume</title>
+<link rel="stylesheet" href="stylesheet.css">
+<script src="javascript.js"></script>
+<link rel="icon" href="kj_logo.icon.webp">
+<style>
+    .auth-box {
+        max-width: 450px;
+        margin: 50px auto;
+        background: transparent;
+        border: 2px solid var(--color-gray-mid);
+        border-radius: var(--radius-md);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 35px 30px;
+        box-shadow: var(--shadow-md);
+    }
+
+    .auth-box h2 {
+        text-align: center;
+        color: var(--color-black);
+        margin-bottom: 25px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--color-black);
+        font-size: 0.95em;
+    }
+
+    .form-group input[type="email"],
+    .form-group input[type="password"],
+    .form-group input[type="text"] {
+        width: 100%;
+        height: 45px;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid var(--color-black);
+        outline: none;
+        font-size: 1em;
+        color: var(--color-black);
+        font-weight: 600;
+        padding: 0 5px;
+        box-sizing: border-box;
+        transition: var(--transition-fast);
+    }
+
+    .show-pass-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .show-pass-box input {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        accent-color: var(--color-black);
+    }
+
+    .show-pass-box label {
+        cursor: pointer;
+        margin: 0;
+        font-size: 0.9em;
+        color: var(--color-black);
+    }
+
+    .auth-btn {
+        width: 100%;
+        height: 50px;
+        background: var(--color-black);
+        color: var(--color-white);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.1em;
+        font-weight: 600;
+        margin-top: 20px;
+        transition: 0.4s;
+    }
+
+    .auth-btn:hover {
+        background: var(--color-white);
+        color: var(--color-black);
+        outline: 2px solid var(--color-black);
+    }
+
+    .auth-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .switch-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 0.95rem;
+        color: var(--color-black);
+    }
+
+    .switch-link a {
+        color: var(--color-black);
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Luxury Perfume</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Perfumes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="cart.html">Cart <span id="cartCount" class="cart-badge">0</span></a>
+            <a href="menu.html">Menu</a>
+        </nav>
+    </header>
+
+    <div class="container fade-in">
+        <div class="auth-box">
+            <h2>Logging in to the system</h2>
+
+            <form id="logForm">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail</label>
+                    <input type="email" id="loginEmail" required placeholder="name@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+
+                    <div class="show-pass-box">
+                        <input type="checkbox" id="showLoginPass" onchange="toggleLoginPassword()">
+                        <label for="showLoginPass">הצג סיסמה (Show Password)</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="auth-btn" id="loginSubmitBtn">Log in</button>
+            </form>
+
+            <div class="switch-link">
+                Don't have an account yet? <a href="register.html"> Register now</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Luxury Perfume. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">
+            <a href="privacy.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Privacy Policy</a> |
+            <a href="returns.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Shipping &
+                Returns</a>
+        </p>
+    </footer>
+
+    <script>
+        function toggleLoginPassword() {
+            const passInput = document.getElementById('loginPassword');
+            passInput.type = passInput.type === 'password' ? 'text' : 'password';
+        }
+
+        document.getElementById('logForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const btn = document.getElementById('loginSubmitBtn');
+
+            if (!email || !password) {
+                alert("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "جاري الدخول...";
+
+            try {
+                const response = await fetch('http://localhost:5000/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    alert(data.message || "تم تسجيل الدخول بنجاح!");
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    window.location.href = "index.html";
+                } else {
+                    alert(data.message || "البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+                    btn.disabled = false;
+                    btn.innerText = "התחבר";
+                }
+            } catch (err) {
+                console.error("Login Error:", err);
+                alert("تعذر الاتصال بالسيرفر! تأكد من تشغيل node server.js في الـ Terminal.");
+                btn.disabled = false;
+                btn.innerText = "התחבר";
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Perfume - OOP Inventory</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="kj_logo.icon.webp">
+</head>
+
+<body>
+
+    <header>
+        <h1>Luxury Perfume</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Perfumes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="cart.html">Cart</a><span id="cartCount" class="cart-badge">0</span></a>
+            <a href="inventory-oop.html">OOP Inventory</a>
+        </nav>
+    </header>
+
+    <div class="container fade-in">
+        <h2>ניהול מלאי מבוסס תכנות מונחה עצמים (OOP)</h2>
+        <p>הטבלה להלן מיוצרת באופן דינמי באמצעות מחלקות וירושה ב-JavaScript</p>
+
+        <div id="oop-table-container"></div>
+    </div>
+
+    <footer>
+        <p>© 2026 Luxury Perfume. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">
+            <a href="privacy.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Privacy Policy</a> |
+            <a href="returns.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Shipping &
+                Returns</a>
+        </p>
+    </footer>
+    <script>
+        // ==========================================
+        // 1. מחלקת אב: Perfume (בושם כללי) - 5 תכונות ו-2 פונקציות
+        // ==========================================
+        class Perfume {
+            constructor(id, name, brand, price, stock) {
+                this.id = id;
+                this.name = name;
+                this.brand = brand;
+                this.price = price;
+                this.stock = stock;
+            }
+
+            // פונקציה 1: בודקת ומחזירה סטטוס זמינות מלאי (שימוש בתנאים)
+            getAvailability() {
+                if (this.stock === 0) {
+                    return "אזל מהמלאי";
+                } else if (this.stock < 5) {
+                    return `מלאי נמוך (${this.stock} יחידות)`;
+                } else {
+                    return "זמין במלאי";
+                }
+            }
+
+            // פונקציה 2: מחשבת מחיר כולל של המלאי הנוכחי (חישוב)
+            calculateTotalStockValue() {
+                return this.price * this.stock;
+            }
+        }
+
+        // ==========================================
+        // 2. מחלקת בן 1: RetailPerfume (בושם לצרכן) - יורשת מ-Perfume + 2 תכונות ו-2 פונקציות
+        // ==========================================
+        class RetailPerfume extends Perfume {
+            constructor(id, name, brand, price, stock, bottleSizeMl, discountPercent) {
+                super(id, name, brand, price, stock);
+                this.bottleSizeMl = bottleSizeMl; // תכונה נוספת 1
+                this.discountPercent = discountPercent; // תכונה נוספת 2
+            }
+
+            // פונקציה נוספת 1: מחשבת מחיר סופי לאחר הנחה (חישוב ותנאי)
+            getFinalPrice() {
+                if (this.discountPercent > 0) {
+                    return this.price * (1 - this.discountPercent / 100);
+                }
+                return this.price;
+            }
+
+            // פונקציה נוספת 2: מחזירה תיאור מפורט של המוצר (הדפסת טקסט)
+            getDetailedDescription() {
+                return `בקבוק ${this.bottleSizeMl} מ"ל במבצע ${this.discountPercent}% הנחה`;
+            }
+        }
+
+        // ==========================================
+        // 3. מחלקת בן 2: TesterPerfume (בושם טסטר) - יורשת מ-Perfume + 2 תכונות ו-2 פונקציות
+        // ==========================================
+        class TesterPerfume extends Perfume {
+            constructor(id, name, brand, price, stock, fluidLevelPercent, hasCap) {
+                super(id, name, brand, price, stock);
+                this.fluidLevelPercent = fluidLevelPercent; // תכונה נוספת 1 (אחוז נוזל שנשאר בטסטר בתצוגה)
+                this.hasCap = hasCap; // תכונה נוספת 2 (האם יש פקק)
+            }
+
+            // פונקציה נוספת 1: בודקת אם צריך להחליף את הטסטר בתצוגה (תנאי)
+            needsReplacement() {
+                return this.fluidLevelPercent < 15 ? "כן, יש להחליף!" : "לא, תקין";
+            }
+
+            // פונקציה נוספת 2: מחזירה מפרט פיזי של הטסטר (הדפסת טקסט ותנאי)
+            getTesterStatus() {
+                const capStatus = this.hasCap ? "עם פקק" : "ללא פקק";
+                return `נוזל: ${this.fluidLevelPercent}%, ${capStatus}`;
+            }
+        }
+
+        // ==========================================
+        // 4. מחלקת בן 3: LuxuryEditionPerfume (מהדורה מוגבלת) - יורשת מ-Perfume + 2 תכונות ו-2 פונקציות
+        // ==========================================
+        class LuxuryEditionPerfume extends Perfume {
+            constructor(id, name, brand, price, stock, boxMaterial, serialNumber) {
+                super(id, name, brand, price, stock);
+                this.boxMaterial = boxMaterial; // תכונה נוספת 1 (חומר האריזה, למשל: קטיפה, עץ)
+                this.serialNumber = serialNumber; // תכונה נוספת 2 (מספר סידורי של המהדורה)
+            }
+
+            // פונקציה נוספת 1: מחשבת תוספת שווי ביטוח יוקרה (חישוב)
+            getInsuranceValue() {
+                return this.price * 0.15; // 15% משווי הבושם מוקצה לביטוח פריט אספנות
+            }
+
+            // פונקציה נוספת 2: מחזירה את תג המהדורה (הדפסת טקסט)
+            getLuxuryTag() {
+                return `מהדורה מוגבלת מס' ${this.serialNumber} (אריזת ${this.boxMaterial})`;
+            }
+        }
+
+        // ==========================================
+        // 5. יצירת 2 אובייקטים מכל מחלקת בן (סה"כ 6 אובייקטים במערך)
+        // ==========================================
+        const inventory = [
+            // מופעים של RetailPerfume
+            new RetailPerfume(101, "Oud Royal", "Armani", 850, 15, "100ml", 10),
+            new RetailPerfume(102, "SAUVAGE", "Dior", 980, 4, "200ml", 0),
+
+            // מופעים של TesterPerfume
+            new TesterPerfume(201, "Amber Noir Tester", "Yves Saint Laurent", 690, 2, 10, false),
+            new TesterPerfume(202, "One Million Tester", "Paco Rabanne", 400, 1, 60, true),
+
+            // מופעים של LuxuryEditionPerfume
+            new LuxuryEditionPerfume(301, "Apres L'Amour Original", "Thomas Kosmala", 1210, 6, "קטיפה מוזהבת", "042/100"),
+            new LuxuryEditionPerfume(302, "Coco Chanel Paris Ltd", "Chanel", 1085, 3, "עץ מהגוני", "011/050")
+        ];
+
+        // ==========================================
+        // 6. הפקה והדפסה של כל המידע לטבלה מעוצבת (שימוש בלולאה)
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('oop-table-container');
+
+            if (container) {
+                // שימוש בלולאת map למעבר על כל האובייקטים והפעלת הפונקציות שלהם דינמית
+                const tableRows = inventory.map((item) => {
+                    let specificInfo = "";
+                    let finalPriceDisplay = `₪${item.price}`;
+
+                    // בדיקת סוג האובייקט בזמן ריצה (Polymorphism / Type Check) כדי להפעיל פונקציות ייחודיות
+                    if (item instanceof RetailPerfume) {
+                        specificInfo = item.getDetailedDescription();
+                        finalPriceDisplay = `₪${item.getFinalPrice()} <small>(לאחר הנחה)</small>`;
+                    } else if (item instanceof TesterPerfume) {
+                        specificInfo = `${item.getTesterStatus()} | דורש החלפה: ${item.needsReplacement()}`;
+                    } else if (item instanceof LuxuryEditionPerfume) {
+                        specificInfo = `${item.getLuxuryTag()} | שווי ביטוח: ₪${item.getInsuranceValue()}`;
+                    }
+
+                    return `
+                        <tr>
+                            <td>${item.id}</td>
+                            <td><strong>${item.name}</strong></td>
+                            <td>${item.brand}</td>
+                            <td>${finalPriceDisplay}</td>
+                            <td>${item.getAvailability()}</td>
+                            <td>₪${item.calculateTotalStockValue()}</td>
+                            <td style="font-size: 14px; color: #555; text-align: right;">${specificInfo}</td>
+                        </tr>
+                    `;
+                }).join('');
+
+                // הזרקת מבנה הטבלה עם מחלקת ה-table הקיימת ב-CSS שלך
+                container.innerHTML = `
+                    <table class="table" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>ברקוד/מזהה</th>
+                                <th>שם הבושם</th>
+                                <th>מותג</th>
+                                <th>מחיר יחידה</th>
+                                <th>סטטוס מלאי</th>
+                                <th>שווי מלאי כולל</th>
+                                <th>מאפיינים ופונקציות OOP ייחודיות</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRows}
+                        </tbody>
+                    </table>
+                `;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,495 @@
+/* ==========================================================================
+   1. Variables & Base
+   ========================================================================== */
+:root {
+    --color-bg: #f5f5f5;
+    --color-text: #f5f5f5;
+    /* تم تعديله ليتماشى مع الكود الأول للكتابة الداكنة */
+    --color-black: #162938;
+    --color-gold: #d4af37;
+    --color-gold-soft: rgba(212, 175, 55, 0.2);
+    --color-white: #ffffff;
+    --color-gray-light: rgba(255, 255, 255, 0.2);
+    /* زجاجي خفيف */
+    --color-gray-mid: rgba(255, 255, 255, 0.5);
+    --color-gray-dark: #162938;
+
+    --radius-sm: 8px;
+    --radius-md: 20px;
+    /* تم زيادتها لتناسب انحناءات الكود الأول */
+    --radius-pill: 25px;
+
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 0 30px rgba(0, 0, 0, 0.3);
+    /* ظل الكود الأول */
+    --shadow-lg: 0 0 20px rgba(0, 0, 0, 0.1);
+
+    --transition-fast: 0.3s ease;
+    --transition-base: 0.5s ease;
+    /* سرعة تأثيرات الكود الأول */
+
+    --font-main: 'DM Sans', 'Segoe UI', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background: url("istockphoto-1459373176-612x612.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   2. Header & Navigation
+   ========================================================================== */
+header {
+    background: transparent;
+    /* جعل الهيدر شفافاً مثل الكود الأول */
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    color: var(--color-gray-dark);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    background: transparent;
+    border: 2px solid var(--color-gray-mid);
+    border-radius: var(--radius-md);
+    padding: 10px;
+    backdrop-filter: blur(20px);
+    /* تأثير الضباب من الكود الأول */
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    color: var(--color-gray-dark)
+}
+
+nav a {
+    position: relative;
+    color: var(--color-black);
+    /* النص داكن ليتماشى مع الخلفية الفاتحة للغيوم */
+    margin-left: 45px;
+    text-decoration: none;
+    font-weight: 1000;
+    transition: color var(--transition-fast);
+}
+
+/* إضافة تأثير الخط المتحرك تحت روابط التنقل من الكود الأول */
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: var(--color-bg);
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+nav a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--color-bg);
+}
+
+/* ==========================================================================
+   3. Layout Containers
+   ========================================================================== */
+.container {
+    padding: 40px;
+    text-align: center;
+    background: transparent;
+    border: 2px solid var(--color-gray-mid);
+    border-radius: var(--radius-md);
+    padding: 25px;
+    backdrop-filter: blur(20px);
+    /* تأثير الضباب من الكود الأول */
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    color: var(--color-gray-dark)
+}
+
+
+
+.container1 {
+    text-align: center;
+    padding: 20px;
+    background: transparent;
+    border: 2px solid var(--color-gray-mid);
+    border-radius: var(--radius-md);
+    padding: 25px;
+    backdrop-filter: blur(20px);
+    /* تأثير الضباب من الكود الأول */
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* تحويل التكست اريا لشكل صناديق مدخلات الكود الأول المعلقة */
+.container1 textarea {
+    width: 50%;
+    padding: 15px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid var(--color-black);
+    background: transparent;
+    outline: none;
+    font-family: inherit;
+    resize: vertical;
+    color: var(--color-black);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   4. Cards & Grid (تأثير الزجاج الضبابي الفاخر)
+   ========================================================================== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.card {
+    background: transparent;
+    border: 2px solid var(--color-gray-mid);
+    border-radius: var(--radius-md);
+    padding: 25px;
+    backdrop-filter: blur(20px);
+    /* تأثير الضباب من الكود الأول */
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card:hover {
+    transform: scale(1.03);
+    /* نفس لغة حركة الـ wrapper */
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+
+.product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+/* ==========================================================================
+   5. Buttons
+   ========================================================================== */
+button,
+.container1 button {
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    /* تحويل الحواف الدائرية إلى حواف حادة ناعمة كالكود الأول */
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.5s;
+    outline: none;
+}
+
+button:hover,
+.container1 button:hover {
+    background: var(--color-white);
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
+    transform: none;
+}
+
+button::after {
+    display: none;
+    /* إيقاف التأثير القديم ليتطابق مع زر btnLogin-popup */
+}
+
+/* ==========================================================================
+   6. Footer
+   ========================================================================== */
+footer {
+    background: rgba(22, 41, 56, 0.1);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--color-gray-mid);
+    color: var(--color-black);
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   7. Entry Animation
+   ========================================================================== */
+.fade-in {
+    opacity: 0;
+    transform: scale(0.9);
+    /* تغيير الأنيميشن ليفتح تدريجياً مثل النوافذ المنبثقة */
+    animation: zoomIn 0.6s ease forwards;
+}
+
+@keyframes zoomIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================================================
+   8. Tables (تحديثها لتصبح متناسقة مع المظهر الزجاجي)
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+    box-shadow: var(--shadow-md);
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--color-gray-mid);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+table th {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 15px;
+}
+
+table td {
+    padding: 15px;
+    color: var(--color-black);
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-gray-mid);
+}
+
+table tr:last-of-type td {
+    border-bottom: none;
+}
+
+table tr:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    /* خلفية فاتحة عند التمرير تضمن وضوح النص الداكن */
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+/* ==========================================================================
+   9. Media (Map / Video)
+   ========================================================================== */
+.media-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+iframe,
+video {
+    width: 80%;
+    max-width: 700px;
+    height: 450px;
+    border: 2px solid var(--color-gray-mid);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(20px);
+}
+
+/* ==========================================================================
+   10. Cart
+   ========================================================================== */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: 2px solid var(--color-gray-mid);
+    backdrop-filter: blur(20px);
+    padding: 15px 30px;
+    margin: 15px 0;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-black);
+    transition: transform var(--transition-fast);
+}
+
+.cart-item:hover {
+    transform: scale(1.02);
+}
+
+/* ==========================================================================
+   11. Search (صندوق البحث العائم المتطور)
+   ========================================================================== */
+.search-container {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 600px;
+    /* مساحة كافية لتسمح للصندوق بالداخل أن يتوسع بحرية */
+    padding: 0 15px;
+}
+
+.search-container input {
+    /* نبدأ بعرض أصغر (مثلاً 70%) ليعطي مساحة للتوسع */
+    width: 70%;
+    padding: 14px 25px;
+    /* الحشو الافتراضي */
+    font-size: 16px;
+
+    /* الخلفية الزجاجية الضبابية الفاخرة */
+    background: transparent;
+    border: 2px solid var(--color-gray-mid);
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-sm);
+
+    color: var(--color-black);
+    outline: none;
+
+    /* جعل التوسع في العرض والحشو انسيابياً وناعماً جداً */
+    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out, border-color var(--transition-fast);
+}
+
+/* التأثير المتطور عند وضع الفأرة (Hover) وعند الضغط للكتابة (Focus) */
+.search-container input:hover,
+.search-container input:focus {
+    width: 100%;
+    /* يتوسع الصندوق ليأخذ المساحة كاملة */
+    padding: 14px 35px;
+    /* يزداد الحشو الداخلي أفقياً ليصبح الصندوق مريحاً وموسعاً */
+    border-color: var(--color-gray-dark);
+    box-shadow: var(--shadow-md);
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   12. Responsive
+   ========================================================================== */
+@media (max-width: 768px) {
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        margin-left: 0;
+    }
+
+    nav a {
+        margin: 0 12px;
+        font-size: 15px;
+    }
+
+    .container1 textarea,
+    iframe,
+    video {
+        width: 95%;
+    }
+}
+
+
+
+
+.cart-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+/* زر إفراغ السلة بتصميم متناسق وعصري */
+.btn-empty {
+    height: 45px;
+    padding: 0 22px;
+    background-color: #fff;
+    color: #e74c3c;
+    border: 1.5px solid #e74c3c;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-empty:hover {
+    background-color: #e74c3c;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.25);
+}
+
+.cart-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+#paypal-button-container {
+    width: 350px;
+    /* مساحة كافية لعرض الأزرار أفقياً */
+    min-width: 250px;
+}
+
+
+
+.cart-badge {
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        /* الهواتف تواجه مشاكل أداء مع الخلفيات الثابتة، هذا السطر يجعل التمرير فائق السلاسة */
+        background-attachment: scroll !important;
+    }
+}

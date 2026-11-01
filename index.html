@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Explore Luxury Perfume for an exclusive collection of luxury fragrances, timeless classics, and authentic scents with fast doorstep delivery.">
+    <meta name="keywords" content="perfumes, luxury fragrance, buy perfume online, authentic scents, cologne">
+    <meta name="author" content="Luxury Perfume">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Luxury Perfume - Premium Fragrances">
+    <meta property="og:description"
+        content="Discover your signature scent from our exclusive collection of world-class luxury perfumes.">
+    <meta property="og:image" content="coco chanel.webp">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Luxury Perfume - Premium Fragrances">
+    <meta name="twitter:description"
+        content="Discover your signature scent from our exclusive collection of world-class luxury perfumes.">
+    <meta name="twitter:image" content="coco chanel.webp">
+    <title>Luxury Perfume - Exclusive Fragrance House</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="kj_logo.icon.webp">
+    <script src="javascript.js"></script>
+    <style>
+        .hero-clean {
+            text-align: center;
+            padding: 80px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #777;
+            margin-bottom: 15px;
+            font-family: var(--font-main);
+        }
+
+        .hero-clean h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--color-black);
+            margin-bottom: 20px;
+        }
+
+        .hero-clean p {
+            font-size: 1.2rem;
+            color: #444;
+            max-width: 650px;
+            margin: 0 auto 35px;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 14px 36px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cta-btn:hover {
+            background: var(--color-white);
+            color: var(--color-black);
+            outline: 2px solid var(--color-black);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            text-align: center;
+            margin: 60px 0 35px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--color-black);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        .families-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto 70px;
+            padding: 0 20px;
+        }
+
+        .family-card {
+            background: transparent;
+            border: 2px solid var(--color-gray-mid);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-base);
+        }
+
+        .family-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .family-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .family-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--color-black);
+        }
+
+        .family-card p {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .family-card a {
+            color: var(--color-black);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--color-black);
+            padding-bottom: 2px;
+            transition: opacity 0.2s;
+        }
+
+        .family-card a:hover {
+            opacity: 0.7;
+        }
+
+        /* Interactive Consultation Box */
+        .scent-finder {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            padding: 45px 30px;
+            text-align: center;
+            background: transparent;
+            border: 2px solid var(--color-gray-mid);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .scent-finder h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--color-black);
+        }
+
+        .scent-finder p {
+            font-size: 1.1rem;
+            color: #444;
+            max-width: 600px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+        }
+
+        .cart-badge {
+            background-color: var(--color-black);
+            color: var(--color-white);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            vertical-align: middle;
+            margin-left: 3px;
+        }
+
+        #live-toast {
+            position: fixed;
+            bottom: -100px;
+            left: 20px;
+            background: transparent;
+            border: 2px solid var(--color-gray-mid);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 5px solid var(--color-gray-mid);
+            font-family: var(--font-main);
+            color: var(--color-bg);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 15px 25px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-md);
+            z-index: 1001;
+            transition: bottom var(--transition-base);
+        }
+
+        #live-toast.show {
+            bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1 class="container0">Luxury Perfume</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Perfumes</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="Cart.html">Cart <span id="cartCount" class="cart-badge">0</span></a>
+            <a href="menu.html">Menu</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-clean fade-in">
+            <span class="hero-tag">The Art of Fine Perfumery</span>
+            <h1>Explore Scents Crafted for Distinction</h1>
+            <p>Every fragrance tells an intimate story. Navigate through our world of sophisticated olfactory art and
+                express your presence effortlessly.</p>
+            <a href="products.html" class="cta-btn">View All Collections</a>
+        </section>
+
+        <section class="fade-in">
+            <div class="section-header">
+                <h2>The Olfactory Families</h2>
+                <p>Find the scent profile that matches your character</p>
+            </div>
+
+            <div class="families-grid">
+                <div class="family-card">
+                    <div class="icon">🌿</div>
+                    <h3>Woody & Earthy</h3>
+                    <p>Enriched with cedar, sandalwood, and patchouli for a warm, grounded, and lasting impression.</p>
+                    <a href="products.html">Explore Woody &rarr;</a>
+                </div>
+
+                <div class="family-card">
+                    <div class="icon">✨</div>
+                    <h3>Oriental & Amber</h3>
+                    <p>Exotic spices, rich resins, and deep vanilla creating an intense, charismatic evening allure.</p>
+                    <a href="products.html">Explore Oriental &rarr;</a>
+                </div>
+
+                <div class="family-card">
+                    <div class="icon">🌸</div>
+                    <h3>Floral Elegance</h3>
+                    <p>Sophisticated bouquets of jasmine, rose, and neroli capturing delicate romance and graceful
+                        style.</p>
+                    <a href="products.html">Explore Floral &rarr;</a>
+                </div>
+
+                <div class="family-card">
+                    <div class="icon">🍋</div>
+                    <h3>Citrus & Fresh</h3>
+                    <p>Vibrant bergamot, crisp herbs, and aquatic notes providing an invigorating boost of energy.</p>
+                    <a href="products.html">Explore Fresh &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="scent-finder fade-in">
+            <h2>Need Help Finding Your Match?</h2>
+            <p>Not sure which fragrance suits your personal aura or upcoming occasion? Reach out to our concierge for
+                bespoke recommendations.</p>
+            <a href="contact.html" class="cta-btn">Speak With a Fragrance Specialist</a>
+        </section>
+    </main>
+
+    <div id="live-toast">Someone just purchased a perfume!</div>
+
+    <footer>
+        <p>© 2026 Luxury Perfume. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.85rem;">
+            <a href="privacy.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Privacy Policy</a> |
+            <a href="returns.html" style="color: #555; text-decoration: underline; margin: 0 10px;">Shipping &
+                Returns</a>
+        </p>
+    </footer>
+
+    <script>
+        const updateCartDisplay = () => {
+            let cartCountElement = document.getElementById('cartCount');
+            if (cartCountElement) {
+                let cart = JSON.parse(localStorage.getItem('perfumeCart')) || [];
+                let totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                cartCountElement.innerText = totalItems;
+            }
+        };
+
+        const startLiveNotifications = () => {
+            const toast = document.getElementById('live-toast');
+            if (!toast) return;
+
+            const buyers = ['Mojahed Omar', 'Aiman Abu Samra', 'Haytham Asaad', 'Khaled Sallam', 'Adi Shaabe', 'Mohammad Khateb', 'Mahmoud Haj Odeh', 'Abed Yousef', 'Yousef Amara', 'Jad Hoashe'];
+            const perfumes = ['VALENTINO', 'GENTLEMEN', 'Ambre Noir', 'BLEU DE CHANEL', 'VERSACE EROS', 'NISHANE HACIVAT', 'REPLICA JAZZ CLUB', 'OUD ROYAL PERFUME', 'BYREDO GYPSY WATER', 'PARFUMS DE MARLY LAYTON'];
+
+            setInterval(() => {
+                let randomBuyer = buyers[Math.floor(Math.random() * buyers.length)];
+                let randomPerfume = perfumes[Math.floor(Math.random() * perfumes.length)];
+
+                toast.innerText = `🛒 ${randomBuyer} just purchased ${randomPerfume}!`;
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4500);
+
+            }, 12000);
+        };
+
+        window.addEventListener('load', () => {
+            updateCartDisplay();
+            startLiveNotifications();
+        });
+    </script>
+</body>
+
+</html>
