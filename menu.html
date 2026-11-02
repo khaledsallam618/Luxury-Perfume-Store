@@ -31,9 +31,6 @@
     <script>
         window.addEventListener('load', () => {
 
-            // =========================================================================
-            // ---- 1) فئة الأب: عطر عام (Perfume) ----
-            // =========================================================================
             class Perfume {
                 constructor(name, price, stock, brand, volume) {
                     this.name = name;
@@ -52,9 +49,6 @@
                 }
             }
 
-            // =========================================================================
-            // ---- 2) عطور العود الشرقية (OudPerfume) ----
-            // =========================================================================
             class OudPerfume extends Perfume {
                 constructor(name, price, stock, brand, volume, oudConcentration, intensity) {
                     super(name, price, stock, brand, volume);
@@ -73,9 +67,6 @@
                 }
             }
 
-            // =========================================================================
-            // ---- 3) العطور الرياضية والمنعشة (SportPerfume) ----
-            // =========================================================================
             class SportPerfume extends Perfume {
                 constructor(name, price, stock, brand, volume, season, freshnessLevel) {
                     super(name, price, stock, brand, volume);
@@ -93,9 +84,6 @@
                 }
             }
 
-            // =========================================================================
-            // ---- 4) العطور الفاخرة المحدودة (LuxuryPerfume) ----
-            // =========================================================================
             class LuxuryPerfume extends Perfume {
                 constructor(name, price, stock, brand, volume, serialNumber, goldPlated) {
                     super(name, price, stock, brand, volume);
@@ -116,10 +104,6 @@
                 }
             }
 
-            // =========================================================================
-            // ---- 5) إنشاء كائنات لجميع عطور المتجر (30 عطر) ----
-            // =========================================================================
-            // عطور العود (7 عطور)
             const oud1 = new OudPerfume("Oud Royal", 850, 15, "Creed", 100, "20%", 9);
             const oud2 = new OudPerfume("Amber Noir", 690, 8, "Tom Ford", 50, "10%", 7);
             const oud3 = new OudPerfume("THOMAS KOSMALA APRES L'AMOUR ORIGINAL", 1210, 4, "Thomas Kosmala", 100, "25%", 10);
@@ -128,7 +112,6 @@
             const oud6 = new OudPerfume("KILIAN ANGELS' SHARE", 890, 7, "Kilian", 50, "15%", 8);
             const oud7 = new OudPerfume("AMOUAGE INTERLUDE MAN", 1180, 6, "Amouage", 100, "25%", 10);
 
-            // العطور الرياضية والمنعشة (9 عطور)
             const sport1 = new SportPerfume("SAUVAGE", 980, 22, "Dior", 100, "Summer", 9);
             const sport2 = new SportPerfume("One Million", 400, 0, "Paco Rabanne", 100, "Winter", 6);
             const sport3 = new SportPerfume("JEAN PAUL GAULTIER", 400, 14, "Jean Paul Gaultier", 125, "Summer", 8);
@@ -139,7 +122,6 @@
             const sport8 = new SportPerfume("NISHANE HACIVAT", 860, 9, "Nishane", 100, "Spring", 8);
             const sport9 = new SportPerfume("CREED SILVER MOUNTAIN WATER", 1524, 8, "Creed", 100, "Summer", 9);
 
-            // العطور الفاخرة (14 عطر)
             const luxury1 = new LuxuryPerfume("COCO CHANEL PARIS", 1085, 3, "Chanel", 100, "9921", true);
             const luxury2 = new LuxuryPerfume("VALENTINO", 534, 7, "Valentino", 50, "4402", false);
             const luxury3 = new LuxuryPerfume("GIORGIO ARMANI", 579, 11, "Giorgio Armani", 100, "1150", false);
@@ -155,9 +137,6 @@
             const luxury13 = new LuxuryPerfume("TOM FORD TOBACCO VANILLE", 1120, 5, "Tom Ford", 100, "7841", true);
             const luxury14 = new LuxuryPerfume("BYREDO GYPSY WATER", 900, 7, "Byredo", 100, "6320", false);
 
-            // =========================================================================
-            // ---- 6) طباعة البيانات في جدول (HTML Rendering) ----
-            // =========================================================================
             const container = document.getElementById('table-container');
 
             if (container) {
