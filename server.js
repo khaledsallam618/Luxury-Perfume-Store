@@ -4,7 +4,6 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
-// استدعاء النماذج من مجلد models
 const Order = require('./models/Order');
 const Product = require('./models/Product');
 const User = require('./models/User');
@@ -12,25 +11,17 @@ const User = require('./models/User');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ==========================================
-// الإعدادات الوسيطة (Middlewares)
-// ==========================================
 app.use(cors());
 app.use(express.json());
 
-// تقديم ملفات الواجهة من المجلد الرئيسي
 app.use(express.static(__dirname));
 
-// ==========================================
-// الاتصال بقاعدة البيانات (MongoDB)
-// ==========================================
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/luxury_perfume';
 
 mongoose.connect(MONGO_URI)
     .then(() => console.log(' Connected successfully to MongoDB'))
     .catch((err) => console.error(' MongoDB connection error:', err));
 
-// قائمة الأسعار المرجعية لمنع التلاعب من المتصفح
 const PRICE_CATALOG = {
     'VALENTINO': 534,
     'GENTLEMEN': 535,
@@ -64,26 +55,18 @@ const PRICE_CATALOG = {
     'BYREDO GYPSY WATER':900,
 };
 
-// ==========================================
-// مسارات المصادقة والمستخدمين (Auth Routes)
-// ==========================================
-
-// تسجيل مستخدم جديد
-// تثبيت المكتبة: npm install stripe
-// الكود الآمن بعد قراءة المفتاح من ملف .env
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 app.post('/api/create-checkout-session', async (req, res) => {
     try {
         const { items } = req.body;
 
-        // تجهيز المنتجات لـ Stripe بناءً على محتويات السلة
         const lineItems = items.map(item => ({
             price_data: {
-                currency: 'ils', // أو أي عملة أخرى
+                currency: 'ils', 
                 product_data: {
                     name: item.name,
                 },
-                unit_amount: Math.round(item.price * 100), // المبلغ بالـ Agorot / سنت
+                unit_amount: Math.round(item.price * 100), 
             },
             quantity: item.quantity,
         }));
@@ -102,9 +85,6 @@ app.post('/api/create-checkout-session', async (req, res) => {
     }
 });
 
-// ==========================================
-// مسار تسجيل مستخدم جديد (Register Route)
-// ==========================================
 app.post('/api/register', async (req, res) => {
     try {
         const { fullName, email, password } = req.body;
@@ -116,7 +96,6 @@ app.post('/api/register', async (req, res) => {
             });
         }
 
-        // التحقق من عدم وجود حساب مسبق بنفس البريد
         const existingUser = await User.findOne({ email: email.toLowerCase() });
         if (existingUser) {
             return res.status(400).json({
@@ -125,11 +104,10 @@ app.post('/api/register', async (req, res) => {
             });
         }
 
-        // إنشاء المستخدم وحفظه في MongoDB
         const newUser = new User({
             fullName,
             email: email.toLowerCase(),
-            password // ملاحظة: يفضل لاحقاً تشفيرها باستخدام bcrypt
+            password 
         });
 
         await newUser.save();
@@ -153,7 +131,6 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-// تسجيل الدخول
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -182,11 +159,6 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// ==========================================
-// مسارات المنتجات (Product Routes)
-// ==========================================
-
-// جلب جميع العطور المتاحة
 app.get('/api/products', async (req, res) => {
     try {
         const products = await Product.find({ inStock: true });
@@ -196,10 +168,6 @@ app.get('/api/products', async (req, res) => {
         return res.status(500).json({ success: false, message: 'تعذر جلب قائمة المنتجات.' });
     }
 });
-
-// ==========================================
-// مسار الدفع والطلبات (Checkout Route)
-// ==========================================
 
 app.post('/api/checkout', async (req, res) => {
     try {
@@ -252,14 +220,10 @@ app.post('/api/checkout', async (req, res) => {
     }
 });
 
-// توجيه المسارات غير المعرفة للصفحة الرئيسية (متوافق مع Express 5)
 app.get('{*path}', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// ==========================================
-// تشغيل السيرفر
-// ==========================================
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Open in browser: http://localhost:${PORT}`);
