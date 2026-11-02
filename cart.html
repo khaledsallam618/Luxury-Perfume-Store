@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="icon" href="kj_logo.icon.webp">
     
-    <!-- استدعاء ملف الجافاسكريبت المشترك -->
     <script src="javascript.js" defer></script>
     
-    <!-- مكتبة PayPal SDK -->
    <script src="https://www.paypal.com/sdk/js?client-id=BAAZzQ4stZ4lrxuf7fJ58FOTylfxgbrMMf9sgNcnOiergAbZA7KG1yvGJkOD_7ngAWefjRUljGGeGoQ1zI&currency=ILS"></script>
     <style>
         .cart-box {
@@ -177,7 +175,6 @@
     </footer>
 
     <script>
-        // عرض وتحديث محتويات السلة داخل الصفحة
         function loadCartDisplay() {
             const cart = getCart();
             const container = document.getElementById('cartItemsContainer');
@@ -266,7 +263,6 @@
             }).render('#paypal-button-container');
         }
 
-        // تشغيل التهيئة فور اكتمال تحميل عناصر الصفحة
         window.addEventListener('DOMContentLoaded', () => {
             loadCartDisplay();
             initPayPalButton();
