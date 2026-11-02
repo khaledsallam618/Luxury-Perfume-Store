@@ -1,13 +1,7 @@
-// تحديد رابط الـ API تلقائياً بناءً على بيئة التشغيل
 const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     ? 'http://localhost:5000'
     : '';
 
-// =========================================================================
-// 1. إدارة سلة المشتريات (Cart Management)
-// =========================================================================
-
-// جلب عناصر السلة بأمان من التخزين المحلي
 const getCart = () => {
     try {
         return JSON.parse(localStorage.getItem('perfumeCart')) || [];
@@ -17,18 +11,15 @@ const getCart = () => {
     }
 };
 
-// حفظ عناصر السلة في التخزين المحلي
 const saveCart = (cartArray) => {
     localStorage.setItem('perfumeCart', JSON.stringify(cartArray));
 };
 
-// حساب الإجمالي الكلي للأسعار
 const calculateTotal = () => {
     const cart = getCart();
     return cart.reduce((sum, item) => sum + (Number(item.price) * (item.quantity || 1)), 0);
 };
 
-// إضافة منتج جديد إلى السلة
 const addToCart = (itemName, itemPrice) => {
     let cart = getCart();
     let existingItem = cart.find(item => item.name === itemName);
@@ -48,7 +39,6 @@ const addToCart = (itemName, itemPrice) => {
     updateGlobalCartCount();
 };
 
-// حذف عنصر معين من السلة بناءً على موقعه (Index)
 const removeItem = (index) => {
     let cart = getCart();
     cart.splice(index, 1);
@@ -59,7 +49,6 @@ const removeItem = (index) => {
     updateGlobalCartCount();
 };
 
-// تفريغ السلة بالكامل
 const clearCart = () => {
     let cart = getCart();
     if (cart.length === 0) return;
@@ -73,7 +62,6 @@ const clearCart = () => {
     }
 };
 
-// تحديث شارة عداد السلة في الـ Navbar
 function updateGlobalCartCount() {
     try {
         const cart = getCart();
@@ -87,22 +75,13 @@ function updateGlobalCartCount() {
     }
 }
 
-// تشغيل تحديث عداد السلة فور تحميل هيكل الصفحة
 window.addEventListener('DOMContentLoaded', updateGlobalCartCount);
-
-// =========================================================================
-// 2. إدارة التواصل (Contact Form)
-// =========================================================================
 
 function handleContactSubmit(event) {
     event.preventDefault();
     alert("תודה שפנית אלינו! ההודעה נשלחה בהצלחה.");
     event.target.reset();
 }
-
-// =========================================================================
-// 3. إدارة تسجيل الحساب (Register)
-// =========================================================================
 
 async function handleRegister(event) {
     event.preventDefault();
@@ -158,10 +137,6 @@ async function handleRegister(event) {
         alert("Server network error, please try again.");
     }
 }
-
-// =========================================================================
-// 4. إدارة تسجيل الدخول (Login)
-// =========================================================================
 
 async function handleLogin(event) {
     event.preventDefault();
